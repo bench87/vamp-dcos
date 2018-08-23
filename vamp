@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+export LANG=en_US.UTF-8
+PROG_HOME=/usr/local/vamp
+LOG_CONFIG=/usr/local/vamp/logback.xml
+APP_CONFIG=/usr/local/vamp/conf/application.conf
+
+if [ -e "/usr/local/vamp/conf/logback.xml" ] ; then
+    LOG_CONFIG="$PROG_HOME/conf/logback.xml"
+fi
+
+java ${JVM_OPT} \
+     -Dlogback.configurationFile=${LOG_CONFIG} \
+     -Dconfig.file="$PROG_HOME/conf/application.conf" \
+	 -cp "$PROG_HOME/bin/*:/usr/local/vamp/bin/lib/*" \
+     io.vamp.bootstrap.Boot
